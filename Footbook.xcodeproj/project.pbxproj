@@ -29,6 +29,8 @@
 		9BDBE20C193FA5800045C05B /* Foot.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE20B193FA5800045C05B /* Foot.m */; };
 		9BDBE20F193FA5BA0045C05B /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE20E193FA5BA0045C05B /* SelectionViewController.m */; };
 		9BDBE215193FD8570045C05B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE214193FD8570045C05B /* User.m */; };
+		9BDBE21819402E920045C05B /* FootPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE21719402E920045C05B /* FootPhotoCollectionCell.m */; };
+		9BDBE21B194034350045C05B /* FootDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE21A194034350045C05B /* FootDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,10 @@
 		9BDBE20E193FA5BA0045C05B /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectionViewController.m; path = ../SelectionViewController.m; sourceTree = "<group>"; };
 		9BDBE213193FD8570045C05B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		9BDBE214193FD8570045C05B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		9BDBE21619402E920045C05B /* FootPhotoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FootPhotoCollectionCell.h; path = ../FootPhotoCollectionCell.h; sourceTree = "<group>"; };
+		9BDBE21719402E920045C05B /* FootPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FootPhotoCollectionCell.m; path = ../FootPhotoCollectionCell.m; sourceTree = "<group>"; };
+		9BDBE219194034350045C05B /* FootDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FootDetailViewController.h; path = ../FootDetailViewController.h; sourceTree = "<group>"; };
+		9BDBE21A194034350045C05B /* FootDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FootDetailViewController.m; path = ../FootDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,10 @@
 				9BDBE1E1193F9E3C0045C05B /* DetailViewController.m */,
 				9BDBE20D193FA5BA0045C05B /* SelectionViewController.h */,
 				9BDBE20E193FA5BA0045C05B /* SelectionViewController.m */,
+				9BDBE219194034350045C05B /* FootDetailViewController.h */,
+				9BDBE21A194034350045C05B /* FootDetailViewController.m */,
+				9BDBE21619402E920045C05B /* FootPhotoCollectionCell.h */,
+				9BDBE21719402E920045C05B /* FootPhotoCollectionCell.m */,
 				9BDBE1E3193F9E3C0045C05B /* Images.xcassets */,
 				9BDBE1DA193F9E3C0045C05B /* Footbook.xcdatamodeld */,
 				9BDBE213193FD8570045C05B /* User.h */,
@@ -285,10 +295,12 @@
 			files = (
 				9BDBE206193FA57F0045C05B /* Comment.m in Sources */,
 				9BDBE1E2193F9E3C0045C05B /* DetailViewController.m in Sources */,
+				9BDBE21819402E920045C05B /* FootPhotoCollectionCell.m in Sources */,
 				9BDBE215193FD8570045C05B /* User.m in Sources */,
 				9BDBE1DF193F9E3C0045C05B /* MasterViewController.m in Sources */,
 				9BDBE1D6193F9E3C0045C05B /* AppDelegate.m in Sources */,
 				9BDBE20F193FA5BA0045C05B /* SelectionViewController.m in Sources */,
+				9BDBE21B194034350045C05B /* FootDetailViewController.m in Sources */,
 				9BDBE1DC193F9E3C0045C05B /* Footbook.xcdatamodeld in Sources */,
 				9BDBE1D2193F9E3C0045C05B /* main.m in Sources */,
 				9BDBE20C193FA5800045C05B /* Foot.m in Sources */,

@@ -87,6 +87,7 @@
         DetailViewController *detailVC = segue.destinationViewController;
         detailVC.detailItem = user;
         detailVC.title = user.name;
+        detailVC.managedObjectContextDetail = self.managedObjectContext;
     }
 }
 

@@ -7,12 +7,15 @@
 //
 
 #import "DetailViewController.h"
+#import "FootPhotoCollectionCell.h"
+#import "FootDetailViewController.h"
 
-@interface DetailViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface DetailViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *numberOfFeetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *footSizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 
 
 @end
@@ -34,6 +37,14 @@
     {
         self.favoriteLabel.text = @"Why can you see this detail?";
     }
+
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Foot"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"picture" ascending:YES]];
+    self.detailFetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:self.managedObjectContextDetail sectionNameKeyPath:nil cacheName:nil];
+
+    self.detailFetchedResultsController.delegate = self;
+    [self.detailFetchedResultsController performFetch:nil];
+    [self.collectionView reloadData];
 }
 
 - (IBAction)onButtonPressedAccessPhotoLibrary:(id)sender
@@ -50,11 +61,47 @@
 
     [picker dismissViewControllerAnimated:YES completion:nil];
 
-    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+    NSData *data = UIImagePNGRepresentation(image);
+
+    Foot *foot = [NSEntityDescription insertNewObjectForEntityForName:@"Foot" inManagedObjectContext:self.managedObjectContextDetail];
+
+    foot.picture = data;
+    [self.detailItem addFeetObject:foot];
+    [self.collectionView reloadData];
+    [self.managedObjectContextDetail save:nil];
+
+    NSLog(@"%@", image);
 
 }
 
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.detailFetchedResultsController.sections[section]numberOfObjects];
+}
 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FootPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCellID" forIndexPath:indexPath];
+    Foot *foot = [self.detailFetchedResultsController objectAtIndexPath:indexPath];
+
+    cell.footImageView.image = [UIImage imageWithData:foot.picture];
+
+    return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    FootDetailViewController *footVC = segue.destinationViewController;
+    footVC.footFetchedResultController = self.detailFetchedResultsController;
+    footVC.footManagedObjectContext = self.managedObjectContextDetail;
+
+    Foot *foot = [self.detailFetchedResultsController objectAtIndexPath:self.collectionView.indexPathsForSelectedItems[0]];
+
+
+
+}
 
 
 @end

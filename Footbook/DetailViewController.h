@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "Foot.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController<NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) User *detailItem;
+@property NSManagedObjectContext *managedObjectContextDetail;
+@property NSFetchedResultsController *detailFetchedResultsController;
 
 @end

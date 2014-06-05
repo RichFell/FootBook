@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="userComment" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="foot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Foot" inverseName="comments" inverseEntity="Foot" syncable="YES"/>
+    </entity>
+    <entity name="Foot" representedClassName="Foot" syncable="YES">
+        <attribute name="hairiness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="foot" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="feet" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User">
+        <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="footSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="numberOfFeet" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="feet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Foot" inverseName="user" inverseEntity="Foot" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <elements>
+        <element name="User" positionX="261" positionY="189" width="128" height="118"/>
+        <element name="Foot" positionX="288" positionY="225" width="128" height="118"/>
+        <element name="Comment" positionX="315" positionY="252" width="128" height="73"/>
+    </elements>
+</model>

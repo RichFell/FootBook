@@ -24,18 +24,19 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    [self fetchUsers];
 
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    self.fetchRequestControllerUser = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:self.managedObjectContextUser sectionNameKeyPath:nil cacheName:nil];
-    self.fetchRequestControllerUser.delegate = self;
-    [self.fetchRequestControllerUser performFetch:nil];
-
-    if (self.fetchRequestControllerUser.fetchedObjects.count == 0)
-    {
-        [self getUserInfo];
-    }
+//    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+//
+//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+//    self.fetchRequestControllerUser = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:self.managedObjectContextUser sectionNameKeyPath:nil cacheName:nil];
+//    self.fetchRequestControllerUser.delegate = self;
+//    [self.fetchRequestControllerUser performFetch:nil];
+//
+//    if (self.fetchRequestControllerUser.fetchedObjects.count == 0)
+//    {
+//        [self getUserInfo];
+//    }
 }
 
 -(void)getUserInfo
@@ -48,12 +49,13 @@
         for (NSString *name in array)
         {
             int numberOffeet = arc4random() % 75;
+            int footSize = arc4random() % 20;
             User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContextUser];
             NSNumber *No = @(0);
             [user setValue:name forKey:@"name"];
             [user setValue:No forKeyPath:@"favorite"];
             [user setValue:@(numberOffeet) forKeyPath:@"numberOfFeet"];
-
+            [user setValue:@(footSize).description forKeyPath:@"footSize"];
         }
         [self.managedObjectContextUser save:nil];
         [self.fetchRequestControllerUser performFetch:nil];
@@ -81,6 +83,31 @@
     NSNumber *Yes = @(1);
     user.favorite = Yes;
     [self.managedObjectContextUser save:nil];
+
+}
+
+-(void)getFlickrImages
+{
+    NSURL *url = [NSURL URLWithString:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=046c464fe0cf12a8ad37b3807e389fdf&text=&format=json&nojsoncallback=1"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+    }];
+}
+
+-(void) fetchUsers
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    self.fetchRequestControllerUser = [[NSFetchedResultsController alloc]initWithFetchRequest:request managedObjectContext:self.managedObjectContextUser sectionNameKeyPath:nil cacheName:nil];
+    self.fetchRequestControllerUser.delegate = self;
+    [self.fetchRequestControllerUser performFetch:nil];
+
+    if (self.fetchRequestControllerUser.fetchedObjects.count == 0)
+    {
+        [self getUserInfo];
+    }
 
 }
 

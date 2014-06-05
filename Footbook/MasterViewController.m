@@ -58,7 +58,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     User *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = user.name;
-    cell.detailTextLabel.text = user.footSize;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Number of feet %@", user.numberOfFeet];
 
     return cell;
 }
@@ -75,9 +75,19 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    SelectionViewController *nextViewController = segue.destinationViewController;
-    nextViewController.fetchRequestControllerUser = self.fetchedResultsController;
-    nextViewController.managedObjectContextUser = self.managedObjectContext;
+    if ([segue.identifier isEqual:@"showUsers"])
+    {
+        SelectionViewController *nextViewController = segue.destinationViewController;
+        nextViewController.fetchRequestControllerUser = self.fetchedResultsController;
+        nextViewController.managedObjectContextUser = self.managedObjectContext;
+    }
+    else if ([segue.identifier isEqual:@"showDetail"])
+    {
+        User *user = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        DetailViewController *detailVC = segue.destinationViewController;
+        detailVC.detailItem = user;
+        detailVC.title = user.name;
+    }
 }
 
 
